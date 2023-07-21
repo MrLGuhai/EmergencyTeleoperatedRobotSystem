@@ -21,15 +21,6 @@ public class Main : MonoBehaviour
     public UploadAngle uploadAngle;
     public ETRSTextToSpeech TextToSpeech;
 
-    // private String myRobotIP = null;//存储下位机IP
-    // private int myRobotPort = 0;//存储下位机端口号
-    // private TcpClient mySocket = null;//存储Socket通讯
-    // private NetworkStream networkStream = null;
-
-    // public TcpClient MySocket { get => mySocket; set => mySocket = value; }
-    // public string MyRobotIP { get => myRobotIP; set => myRobotIP = value; }
-    // public int MyRobotPort { get => myRobotPort; set => myRobotPort = value; }
-
     private string ipAddress = Config.IP;
     private int ipPort = Config.port;
     private TcpClient client;
@@ -120,13 +111,6 @@ public class Main : MonoBehaviour
             menuTime.text = hours + ":" + minutes;
             yield return null;
         }
-    }
-
-    public void Bofan()
-    {
-        // Replayer replayer = new Replayer();
-        // replayer.play("E:\\unity project\\EmergencyTeleoperatedRobotSystem\\Assets\\replaydata.json");
-
     }
 
     private byte[] ReadBytes(NetworkStream stream, int bytesToRead)
@@ -258,7 +242,6 @@ public class Main : MonoBehaviour
         //FIXME:
         updateMenuVar("重建场景中，请勿操作...");
 
-
         // 清空接收到的面片数据
         receivedMeshMessage.Clear();
         // 发送舵机旋转消息回服务器
@@ -267,11 +250,7 @@ public class Main : MonoBehaviour
         dataMessage.BotMotor = new BotMotor();
         dataMessage.BotMotor.Angle = 0;
         client.sendMessage(dataMessage);
-        // byte[] data = dataMessage.ToByteArray();
-        // client.GetStream().Write(data, 0, data.Length);
         Debug.Log("发送相机旋转消息回服务器");
-
-        //TODO: 添加等待动画
     }
 
     public void fixMeshPosition()
@@ -337,8 +316,6 @@ public class Main : MonoBehaviour
             dataMessage.BotArm.DataBuffer = ByteString.CopyFrom(commDatabuff);
 
             client.sendMessage(dataMessage);
-            // byte[] data = dataMessage.ToByteArray();
-            // client.GetStream().Write(data, 0, data.Length);
         }
     }
 
